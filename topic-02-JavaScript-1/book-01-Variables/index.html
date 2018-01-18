@@ -115,13 +115,13 @@ body
   <header class="header item">
     <i id="toc" class="sitemap icon"></i>
     <a href="../index.html">
-      Module Introduction
+       JavaScript Part One
     </a>
   </header>
   <div class="right tab-menu menu">
     
-    <a class="item" data-tab="Add some Behaviour">
-      Add some Behaviour
+    <a class="item" data-tab="Variables">
+      Variables
     </a>
     
     <a class="item" data-tab="01">
@@ -130,14 +130,6 @@ body
     
     <a class="item" data-tab="02">
       02
-    </a>
-    
-    <a class="item" data-tab="03">
-      03
-    </a>
-    
-    <a class="item" data-tab="04">
-      04
     </a>
     
     <div class="item">
@@ -220,90 +212,87 @@ body
     <div class="ui basic segment" id="labchat">
       <br>
       
-      <div  class="ui tab segment lab" data-tab="Add some Behaviour">
+      <div  class="ui tab segment lab" data-tab="Variables">
         <h1>Objectives</h1>
-<p>This lab will recap laying out a webpage using Bootstrap</p>
+<p>This lab will introduce you to JavaScript Variables.</p>
 <ul>
-<li><a href="#/01">Adding JavaScript to the code</a></li>
-<li><a href="#/02">Selecting the elements</a></li>
-<li><a href="#/03">Selecting an option</a></li>
-<li><a href="#/04">Submitting the Form</a></li>
+<li><p><a href="#/01">Variables</a></p>
+</li>
+<li><p><a href="#/02">Creating Variables</a></p>
+</li>
 </ul>
 
       </div>
      
       <div  class="ui tab segment lab" data-tab="01">
-        <h1>Adding JavaScript to the code</h1>
-<p>In Lab01 we have a folder called <strong>.js</strong> and in it is a file called <strong>form.js</strong>. We are going to add code to this file.</p>
-<p>In the file <strong>form.html</strong> add a link to the <strong>form.js</strong> file as follows  (after the links to the other <strong>.js</strong> files):</p>
-<pre><code>&lt;script src=&quot;js/form.js&quot;&gt;&lt;/script&gt;</code></pre>
+        <h1>Variables</h1>
+<p>A variable is simply a place in the computer&#39;s memory to store information. All variables are referred to by the unique name you assigned to them.</p>
+<h2>Variable names</h2>
+<ul>
+<li>Variable names must begin with a letter, $, or the underscore(_).</li>
+<li>Variable names can contain only letters, numbers, $ and underscores(_).</li>
+<li>Do not use spaces in names.</li>
+<li>Names are case-sensitive, so <strong>Age</strong> and <strong>age</strong> are not the same.</li>
+<li>Do not use a reserved word.</li>
+</ul>
+<h2>Data Types</h2>
+<p>JavaScript has the following types of data:</p>
+<ul>
+<li><strong>Numeric</strong>: Basic numbers such as integers or floating point values.</li>
+<li><strong>String</strong>: Just a series of letters and other symbols enclosed inside of quote marks.</li>
+<li><strong>Boolean</strong>: true or false.</li>
+<li><strong>Object</strong>: An object is a collection of properties. The properties can be any of the previously mentioned types, as well as other objects and functions.</li>
+</ul>
+<p><strong>Notes</strong>:</p>
+<ul>
+<li>In JavaScript, a variable without a value, has the value <strong>undefined</strong>. The data type is also <strong>undefined</strong>. For Example: var name; this variable is undefined and its&#39; data type is undefined as no value has been assigned yet.</li>
+<li>In JavaScript null is &quot;nothing&quot;. It is supposed to be something that doesn&#39;t exist. In JavaScript, the data type of null is an object.</li>
+</ul>
+<h2>typeof operator</h2>
+<p>The <strong>typeof</strong> operator in JavaScript allows you to probe the data type of its operand as illustrated in the 
+following <a href="archives/Class Files/example1.htm" target = "_blank">example</a>:</p>
+<pre><code> var myvar=5
+ alert(typeof(myvar)); //alerts &quot;number&quot;</code></pre>
 
       </div>
      
       <div  class="ui tab segment lab" data-tab="02">
-        <h1>Selecting the elements</h1>
-<p>We are going to add code to the <strong>form.js</strong> file that will allow JavaScript to refer to (select) elements on the webpage. Each element can be
-selected using their unique <strong>id</strong>:</p>
-<pre><code>var elForm, elSelectPackage, elPackageHint, elTerms, elTermsHint, elcoupon, price; // Declare variables
-
-elForm          = document.getElementById(&#39;formSignup&#39;);    //form      
-elSelectPackage = document.getElementById(&#39;package&#39;);       // select element
-elPackageHint   = document.getElementById(&#39;packageHint&#39;);   // Blank element underneath the select option
-elTerms         = document.getElementById(&#39;terms&#39;);         // terms and conditions checkbox
-elTermsHint     = document.getElementById(&#39;termsHint&#39;);     // Blank element underneath the terms and conditions checkbox
-elcoupon        = document.getElementById(&#39;coupon&#39;);        // coupon checkbox</code></pre>
-
-      </div>
-     
-      <div  class="ui tab segment lab" data-tab="03">
-        <h1>Selecting an option</h1>
-<p>Now we are going to add code to display a message when the user changes the option.
-When the user selects an option from the select element, the program responds to this event by displaying a message and noting the price.</p>
-<pre><code>function packageHint() {                                 // Declare function
-  var pack = this.options[this.selectedIndex].value;     // Get selected option
-  if (pack === &#39;monthly&#39;) {                              // If monthly package
-    elPackageHint.innerHTML = &#39;Save $10 if you pay for 1 year!&#39;;//Show this msg
-    price=60;                                            // Set price to 60
-  } else {                                               // Otherwise
-    elPackageHint.innerHTML = &#39;Wise choice!&#39;;            // Show this message
-    price = 50;                                          // Set price to 50
-  }
-}</code></pre>
-<p>This function will not run until it is called, so we will add code that reponds to the event of the user selecting an option from the select element as follows:</p>
-<pre><code>elSelectPackage.addEventListener(&#39;change&#39;, packageHint, false);//event listener for select element change - calls packageHint() function</code></pre>
-
-      </div>
-     
-      <div  class="ui tab segment lab" data-tab="04">
-        <h1>Submitting the Form</h1>
-<p>We now want to add code to respond to the user when the user submits the selection.</p>
-<p>Before the membership is processed a few checks must be carried out:</p>
-<ol>
-<li>Has the user made a selection?</li>
-<li>Has the user agreed to the terms and conditions?</li>
-</ol>
-<p>Once these are checked the final price can be calculated.</p>
-<pre><code>function checkTerms(event) {                                   // Declare function
-  var selection = elSelectPackage.options[elSelectPackage.selectedIndex].value; // Get selected option
-  if (selection == &quot;none&quot;) {                                   // if no selection is made
-      alert(&quot;You must make a selection&quot;);                  // Display dialog box with error message
-      event.preventDefault();                              // Don&#39;t submit form
-      return;                                                  // Exit the function
-  }
-
-
-  if (!elTerms.checked) {                                // If terms and conditions checkbox ticked
-    elTermsHint.innerHTML = &#39;You must agree to the terms.&#39;; // Show message
-    event.preventDefault();                              // Don&#39;t submit form
-    return;                                              // Exit the function
-  }
-  if (elcoupon.checked) {                                // If coupon checkbox ticked 
-    price = price * .90;                                 // Apply discount of 10%.
-  }
-  alert(&quot;The membership is \u20AC&quot; + price);             // Display membership charge
-}</code></pre>
-<p>This function will not run until it is called, so we will add code that reponds to the event of the user submitting the membership form (clicking the submit button) as follows:</p>
-<pre><code>elForm.addEventListener(&#39;submit&#39;, checkTerms, false);//event listener for submit button - calls checkTerms() function</code></pre>
+        <h1>Creating Variables</h1>
+<p>You do not need to decide upon the type of data that the variable is going to hold when you declare it. 
+JavaScript is a loosely typed language. That means you do not have to specify the data type of a variable when you declare it, 
+and data types are converted automatically as needed during script execution. So, for example, you could define a variable as follows:
+var answer = 42</p>
+<p>And later, you could assign the same variable a string value, for example,
+answer = &quot;Thanks for all the fish...&quot;</p>
+<p>Use the <strong>var</strong> keyword before the variable name. As we have already seen, you do not have to give the variable a value either (it can
+be undefined).</p>
+<pre><code> var myname;
+ myname=&quot;Henrik&quot;;
+ document.write(myname);</code></pre>
+<p>This example would write &quot;Henrik&quot; in the document.</p>
+<p><strong>Note</strong>: When you want text to be stored in a variable you need to put the text in &quot; &quot;.
+The reason is that JavaScript uses &quot; &quot; to tell the difference between text and variables.</p>
+<h2>Example</h2>
+<p>In the following <a href="archives/Class Files/example2.htm" target = "_blank">example</a>, we illustrate how to assign a value to a variable and
+output it to the document.</p>
+<pre><code> &lt;!DOCTYPE html&gt;
+ &lt;html lang=&quot;en&quot;&gt;
+ &lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;title&gt;My JavaScript Page&lt;/title&gt;
+ &lt;/head&gt;
+ &lt;body&gt;
+ &lt;script&gt;
+  var name;
+  name=&quot;Fred Bloggs&quot;;
+  document.write(&quot;Your name is &quot; + myname);
+ &lt;/script&gt;
+ &lt;/body&gt;
+ &lt;/html&gt;</code></pre>
+<p>In the first line, the name &quot;Fred Bloggs&quot; is stored in the variable name. </p>
+<p>On the next line, the myname variable is written to the document.</p>
+<p>The result is that <strong>Your name is Fred Bloggs</strong> will be written on the page.</p>
+<p><strong>Note</strong>: Combining strings is called <strong>concatenation</strong>, and you accomplish it with the <strong>+</strong> operator.</p>
 
       </div>
      

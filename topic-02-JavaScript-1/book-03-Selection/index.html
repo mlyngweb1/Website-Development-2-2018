@@ -115,13 +115,13 @@ body
   <header class="header item">
     <i id="toc" class="sitemap icon"></i>
     <a href="../index.html">
-      Module Introduction
+       JavaScript Part One
     </a>
   </header>
   <div class="right tab-menu menu">
     
-    <a class="item" data-tab="Add some Behaviour">
-      Add some Behaviour
+    <a class="item" data-tab="Selection">
+      Selection
     </a>
     
     <a class="item" data-tab="01">
@@ -220,90 +220,144 @@ body
     <div class="ui basic segment" id="labchat">
       <br>
       
-      <div  class="ui tab segment lab" data-tab="Add some Behaviour">
+      <div  class="ui tab segment lab" data-tab="Selection">
         <h1>Objectives</h1>
-<p>This lab will recap laying out a webpage using Bootstrap</p>
+<p>This lab explores the how to do Selection.  </p>
 <ul>
-<li><a href="#/01">Adding JavaScript to the code</a></li>
-<li><a href="#/02">Selecting the elements</a></li>
-<li><a href="#/03">Selecting an option</a></li>
-<li><a href="#/04">Submitting the Form</a></li>
+<li><a href="#01">If ... else</a></li>
+<li><a href="#02">Comparison Operators</a></li>
+<li><a href="#03">And, Or &amp; Not</a></li>
+<li><a href="#04">Switch</a></li>
 </ul>
 
       </div>
      
       <div  class="ui tab segment lab" data-tab="01">
-        <h1>Adding JavaScript to the code</h1>
-<p>In Lab01 we have a folder called <strong>.js</strong> and in it is a file called <strong>form.js</strong>. We are going to add code to this file.</p>
-<p>In the file <strong>form.html</strong> add a link to the <strong>form.js</strong> file as follows  (after the links to the other <strong>.js</strong> files):</p>
-<pre><code>&lt;script src=&quot;js/form.js&quot;&gt;&lt;/script&gt;</code></pre>
+        <h1>If ... else</h1>
+<p>Sometimes JavaScript requires the ability to make distinctions between different options/choices.</p>
+<p>For example, you might have a script that checks which browser the user arrives with. If it&#39;s MSIE, 
+a page specifically designed for that browser should be loaded, if it&#39;s Chrome another page should be loaded.</p>
+<p>The general syntax for <strong>if</strong> statements is:</p>
+<pre><code>if (condition) 
+   {action1} 
+else 
+   {action2}</code></pre>
+<p>An example could be:</p>
+<pre><code>if (browser==&quot;MSIE&quot;) 
+   {alert(&quot;You are using MSIE&quot;)}
+else 
+   {alert(&quot;You are using Chrome&quot;)}</code></pre>
+<p><strong>Notes</strong>:</p>
+<ul>
+<li><p>Again it is important to note that if is written as &quot;if&quot;. Using the capital &quot;IF&quot; would cause an error. </p>
+</li>
+<li><p>Also note that when comparing variables you will need to have two equals signs next to each other (==). If we wrote browser=&quot;MSIE&quot; we would actually store &quot;MSIE&quot; in the variable called browser. When you write browser==&quot;MSIE&quot; JavaScript knows that you want it to compare rather than assign a value. </p>
+</li>
+<li><p>More complex if statements can be made by simply entering new if statements in the else part: </p>
+</li>
+</ul>
+<pre><code>if (condition) 
+   {action1} 
+else {if (condition) {action2}
+else {action3}</code></pre>
+<p>An <a href="archives/Class Files/example1.htm" target = "_blank">example</a>:</p>
+<pre><code>if (browser==&quot;Firefox&quot; || browser==&quot;firefox&quot; || browser==&quot;FIREFOX&quot;){
+    alert(&quot;You are using Mozilla Firefox&quot;)
+}
+else {if (browser==&quot;Chrome&quot; || browser==&quot;chrome&quot; ||browser==&quot;CHROME&quot;) {
+    alert(&quot;You are using Google Chrome&quot;)
+     }
+    else {
+    alert(&quot;You are using an unknown browser&quot;)
+    }
+}</code></pre>
 
       </div>
      
       <div  class="ui tab segment lab" data-tab="02">
-        <h1>Selecting the elements</h1>
-<p>We are going to add code to the <strong>form.js</strong> file that will allow JavaScript to refer to (select) elements on the webpage. Each element can be
-selected using their unique <strong>id</strong>:</p>
-<pre><code>var elForm, elSelectPackage, elPackageHint, elTerms, elTermsHint, elcoupon, price; // Declare variables
-
-elForm          = document.getElementById(&#39;formSignup&#39;);    //form      
-elSelectPackage = document.getElementById(&#39;package&#39;);       // select element
-elPackageHint   = document.getElementById(&#39;packageHint&#39;);   // Blank element underneath the select option
-elTerms         = document.getElementById(&#39;terms&#39;);         // terms and conditions checkbox
-elTermsHint     = document.getElementById(&#39;termsHint&#39;);     // Blank element underneath the terms and conditions checkbox
-elcoupon        = document.getElementById(&#39;coupon&#39;);        // coupon checkbox</code></pre>
+        <h1>Comparison Operators</h1>
+<p>The following table contains the different comparison operators: </p>
+<p><img src="img/op.png" alt=""></p>
 
       </div>
      
       <div  class="ui tab segment lab" data-tab="03">
-        <h1>Selecting an option</h1>
-<p>Now we are going to add code to display a message when the user changes the option.
-When the user selects an option from the select element, the program responds to this event by displaying a message and noting the price.</p>
-<pre><code>function packageHint() {                                 // Declare function
-  var pack = this.options[this.selectedIndex].value;     // Get selected option
-  if (pack === &#39;monthly&#39;) {                              // If monthly package
-    elPackageHint.innerHTML = &#39;Save $10 if you pay for 1 year!&#39;;//Show this msg
-    price=60;                                            // Set price to 60
-  } else {                                               // Otherwise
-    elPackageHint.innerHTML = &#39;Wise choice!&#39;;            // Show this message
-    price = 50;                                          // Set price to 50
-  }
+        <h1>And, Or &amp; Not</h1>
+<p>To further enhance your if statements you can use the so-called <strong>logical</strong> operators.</p>
+<h2>And</h2>
+<p><strong>And</strong> is written as <strong>&amp;&amp;</strong> and allows you to chain together two or more expressions so that <em>all of them have to 
+individually evaluate to <strong>true</strong> for the whole expression to return true</em>.</p>
+<p>Eg: If the basket contains egg and the basket contains bacon, we can have egg and bacon.</p>
+<p>The syntax is: </p>
+<pre><code>if (condition &amp;&amp; condition) {
+ action;
 }</code></pre>
-<p>This function will not run until it is called, so we will add code that reponds to the event of the user selecting an option from the select element as follows:</p>
-<pre><code>elSelectPackage.addEventListener(&#39;change&#39;, packageHint, false);//event listener for select element change - calls packageHint() function</code></pre>
+<p>For example:</p>
+<pre><code>if (hour==12 &amp;&amp; minute==0) {
+  alert(&quot;it&#39;s noon&quot;);
+}</code></pre>
+<h2>Or</h2>
+<p><strong>Or</strong> is written as <strong>||</strong> and allows you to chain together two or more expressions so that <em>one or more of them have to individually 
+evaluate to <strong>true</strong> for the whole expression to return true</em>. </p>
+<p>Eg: If the basket contains milk or the basket contains water, we can have something to drink.</p>
+<p>The syntax is: </p>
+<pre><code>if (condition || condition) {
+  action;
+}</code></pre>
+<p>For example:</p>
+<pre><code>if (hour==11 || hour==10) {
+  alert(&quot;it&#39;s less than 2 hours till noon&quot;);
+}</code></pre>
+<h2>Not</h2>
+<p><strong>Not</strong> is written as <strong>!</strong> and is used to invert the result.</p>
+<p>Eg: If not the basket contains egg or not the basket contains bacon, we can&#39;t have egg and bacon.</p>
+<p>The syntax is: </p>
+<pre><code>if (!(condition)) {
+  action;
+}</code></pre>
+<p>For example:</p>
+<pre><code>if (!(hour==11)) {
+ alert(&quot;it&#39;s more than 1 hour till noon&quot;);
+}</code></pre>
 
       </div>
      
       <div  class="ui tab segment lab" data-tab="04">
-        <h1>Submitting the Form</h1>
-<p>We now want to add code to respond to the user when the user submits the selection.</p>
-<p>Before the membership is processed a few checks must be carried out:</p>
-<ol>
-<li>Has the user made a selection?</li>
-<li>Has the user agreed to the terms and conditions?</li>
-</ol>
-<p>Once these are checked the final price can be calculated.</p>
-<pre><code>function checkTerms(event) {                                   // Declare function
-  var selection = elSelectPackage.options[elSelectPackage.selectedIndex].value; // Get selected option
-  if (selection == &quot;none&quot;) {                                   // if no selection is made
-      alert(&quot;You must make a selection&quot;);                  // Display dialog box with error message
-      event.preventDefault();                              // Don&#39;t submit form
-      return;                                                  // Exit the function
-  }
-
-
-  if (!elTerms.checked) {                                // If terms and conditions checkbox ticked
-    elTermsHint.innerHTML = &#39;You must agree to the terms.&#39;; // Show message
-    event.preventDefault();                              // Don&#39;t submit form
-    return;                                              // Exit the function
-  }
-  if (elcoupon.checked) {                                // If coupon checkbox ticked 
-    price = price * .90;                                 // Apply discount of 10%.
-  }
-  alert(&quot;The membership is \u20AC&quot; + price);             // Display membership charge
+        <h1>Switch</h1>
+<p>The <strong>switch</strong> statement is another useful construct that works on a conditional basis. When you need to make a choice 
+between more than two items you will find the switch statement much easier to write and maintain.</p>
+<p>The general syntax for <strong>switch</strong> statements is:</p>
+<pre><code>switch (variable) {
+  case &#39;value 1&#39;:
+    perform some action when variable == &#39;value 1&#39;;
+    break;
+  case &#39;value 2&#39;:
+    perform some action when variable == &#39;value 2&#39;;
+    break;
+  default:
+    perform  action if none of the above is true;
 }</code></pre>
-<p>This function will not run until it is called, so we will add code that reponds to the event of the user submitting the membership form (clicking the submit button) as follows:</p>
-<pre><code>elForm.addEventListener(&#39;submit&#39;, checkTerms, false);//event listener for submit button - calls checkTerms() function</code></pre>
+<p>The first line of a switch statement begins with the keyword <strong>switch</strong>, followed by a variable name inside brackets, 
+followed by an opening brace symbol ({). </p>
+<p>Essentially the code says &quot;Let&#39;s get the value of this variable and see if it matches one of several values&quot;. </p>
+<p>Each test is called a <strong>case</strong>, and a switch statement has one or more cases. </p>
+<p>The case keyword indicates the beginning of a case; it is followed by some value and then a colon. </p>
+<p>You must then indicate what is to be done next, such as display a message; or execute a function, etc... </p>
+<p>For each case entry, you add a <strong>break</strong>; statement. This step is important - the break; statement exits the switch statement.</p>
+<p>You can also add a <strong>default</strong> keyword before the closing brace (}). This statement applies if none of the test cases is true.</p>
+<p>The switch statement is illustrated in the following <a href="archives/Class Files/example2.htm" target = "_blank">example</a>:</p>
+<pre><code>ans=prompt(&quot;Which Fruit do you like&quot;,&quot;apple&quot;);
+switch (ans)
+{
+case &quot;apple&quot;:
+  document.write(&quot;&lt;h1&gt;You like Apples&lt;/h1&gt;&quot;);
+  break;
+case &quot;orange&quot;:
+  document.write(&quot;&lt;h1&gt;You like Oranges&lt;/h1&gt;&quot;);
+  break;
+default:
+   document.write(&quot;&lt;h1&gt;You like &quot; + ans + &quot;s&lt;/h1&gt;&quot;);
+}</code></pre>
 
       </div>
      

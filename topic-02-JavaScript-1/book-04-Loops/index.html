@@ -115,13 +115,13 @@ body
   <header class="header item">
     <i id="toc" class="sitemap icon"></i>
     <a href="../index.html">
-      Module Introduction
+       JavaScript Part One
     </a>
   </header>
   <div class="right tab-menu menu">
     
-    <a class="item" data-tab="Add some Behaviour">
-      Add some Behaviour
+    <a class="item" data-tab="Loops">
+      Loops
     </a>
     
     <a class="item" data-tab="01">
@@ -138,6 +138,10 @@ body
     
     <a class="item" data-tab="04">
       04
+    </a>
+    
+    <a class="item" data-tab="05">
+      05
     </a>
     
     <div class="item">
@@ -220,90 +224,109 @@ body
     <div class="ui basic segment" id="labchat">
       <br>
       
-      <div  class="ui tab segment lab" data-tab="Add some Behaviour">
+      <div  class="ui tab segment lab" data-tab="Loops">
         <h1>Objectives</h1>
-<p>This lab will recap laying out a webpage using Bootstrap</p>
+<p>This lab explores the various methods of executing loops in JavaScript.  </p>
 <ul>
-<li><a href="#/01">Adding JavaScript to the code</a></li>
-<li><a href="#/02">Selecting the elements</a></li>
-<li><a href="#/03">Selecting an option</a></li>
-<li><a href="#/04">Submitting the Form</a></li>
+<li><a href="#01">Introduction</a></li>
+<li><a href="#02">For Loops</a></li>
+<li><a href="#03">While Loops</a></li>
+<li><a href="#04">Do ... While Loops</a></li>
+<li><a href="#05">Break and Continue</a></li>
 </ul>
 
       </div>
      
       <div  class="ui tab segment lab" data-tab="01">
-        <h1>Adding JavaScript to the code</h1>
-<p>In Lab01 we have a folder called <strong>.js</strong> and in it is a file called <strong>form.js</strong>. We are going to add code to this file.</p>
-<p>In the file <strong>form.html</strong> add a link to the <strong>form.js</strong> file as follows  (after the links to the other <strong>.js</strong> files):</p>
-<pre><code>&lt;script src=&quot;js/form.js&quot;&gt;&lt;/script&gt;</code></pre>
+        <h1>Introduction</h1>
+<p>Imagine that you wanted a script to perform the same routine over and over again 50 times in a row. 
+An example could be if you wanted a script to produce a table comparing temperatures in Fahrenheit and Celsius. The script 
+should produce 50 lines in a table showing different temperatures according to the two scales. 
+Instead of adding 50 almost identical lines in your script you could use a loop to enable the script to perform a task like this.</p>
+<p>There are two different kinds of loops: <strong>for</strong> and <strong>while</strong>. </p>
+<p>The <strong>for</strong> loop is used when you know in advance how many times the script should perform. For example if you wanted it to 
+create exactly 50 lines. </p>
+<p>The <strong>while</strong> loop is used when you want the loop to continue until a certain condition becomes true. 
+For example, if you wanted to make a table comparing Celsius and Fahrenheit, stepping 15 degrees for each row, 
+and you wanted the table to contain values up to 1200 degrees of Celsius. </p>
 
       </div>
      
       <div  class="ui tab segment lab" data-tab="02">
-        <h1>Selecting the elements</h1>
-<p>We are going to add code to the <strong>form.js</strong> file that will allow JavaScript to refer to (select) elements on the webpage. Each element can be
-selected using their unique <strong>id</strong>:</p>
-<pre><code>var elForm, elSelectPackage, elPackageHint, elTerms, elTermsHint, elcoupon, price; // Declare variables
-
-elForm          = document.getElementById(&#39;formSignup&#39;);    //form      
-elSelectPackage = document.getElementById(&#39;package&#39;);       // select element
-elPackageHint   = document.getElementById(&#39;packageHint&#39;);   // Blank element underneath the select option
-elTerms         = document.getElementById(&#39;terms&#39;);         // terms and conditions checkbox
-elTermsHint     = document.getElementById(&#39;termsHint&#39;);     // Blank element underneath the terms and conditions checkbox
-elcoupon        = document.getElementById(&#39;coupon&#39;);        // coupon checkbox</code></pre>
+        <h1>For Loops</h1>
+<p>SYNTAX:</p>
+<pre><code>for (variable=startvalue; variable&lt;=endvalue; variable=variable+incrementfactor) 
+{
+// Here goes the script lines you want to loop.
+}</code></pre>
+<p><strong>Note</strong>: The incrementfactor could be negative if you wanted.
+Furthermore the &lt;= could be any comparing statement, for example &gt;, == or whatever.</p>
+<p>We will now look at an <a href="archives/Class Files/example1.htm" target = "_blank">example</a> that uses a <strong>For</strong> loop.</p>
+<pre><code>&lt;table&gt;
+&lt;tr&gt;&lt;th&gt;CELSIUS&lt;/th&gt;&lt;th&gt;FAHRENHEIT&lt;/th&gt;&lt;/tr&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+for (celsius=0; celsius&lt;=50; celsius=celsius+1)
+{
+document.write(&quot;&lt;tr&gt;&lt;td&gt;&quot;+celsius+&quot;&lt;/td&gt;&lt;td&gt;&quot; +((celsius*9/5)+32)+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;);
+}
+&lt;/script&gt;
+&lt;/table&gt;</code></pre>
 
       </div>
      
       <div  class="ui tab segment lab" data-tab="03">
-        <h1>Selecting an option</h1>
-<p>Now we are going to add code to display a message when the user changes the option.
-When the user selects an option from the select element, the program responds to this event by displaying a message and noting the price.</p>
-<pre><code>function packageHint() {                                 // Declare function
-  var pack = this.options[this.selectedIndex].value;     // Get selected option
-  if (pack === &#39;monthly&#39;) {                              // If monthly package
-    elPackageHint.innerHTML = &#39;Save $10 if you pay for 1 year!&#39;;//Show this msg
-    price=60;                                            // Set price to 60
-  } else {                                               // Otherwise
-    elPackageHint.innerHTML = &#39;Wise choice!&#39;;            // Show this message
-    price = 50;                                          // Set price to 50
-  }
+        <h1>While Loops</h1>
+<p>SYNTAX: </p>
+<pre><code>while (variable&lt;=endvalue) 
+{
+// Here goes the script lines you want to loop.
 }</code></pre>
-<p>This function will not run until it is called, so we will add code that reponds to the event of the user selecting an option from the select element as follows:</p>
-<pre><code>elSelectPackage.addEventListener(&#39;change&#39;, packageHint, false);//event listener for select element change - calls packageHint() function</code></pre>
+<p><strong>Note</strong>: The &lt;= could be anything that would fit the purpose for example &gt;, == or whatever. </p>
+<p>We will now look at an <a href="archives/Class Files/example2.htm" target = "_blank">example</a> that uses a <strong>While</strong> loop.</p>
+<pre><code>&lt;table&gt;
+&lt;tr&gt;&lt;th&gt;CELSIUS&lt;/th&gt;&lt;th&gt;FAHRENHEIT&lt;/th&gt;&lt;/tr&gt;
+&lt;script&gt;
+celsius = 0;
+while (celsius&lt;=50)
+{
+ document.write(&quot;&lt;tr&gt;&lt;td&gt;&quot;+celsius+&quot;&lt;/td&gt;&lt;td&gt;&quot;+((celsius*9/5)+32)+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;);
+ celsius = celsius + 1;
+}
+&lt;/script&gt;
+&lt;/table&gt;</code></pre>
 
       </div>
      
       <div  class="ui tab segment lab" data-tab="04">
-        <h1>Submitting the Form</h1>
-<p>We now want to add code to respond to the user when the user submits the selection.</p>
-<p>Before the membership is processed a few checks must be carried out:</p>
-<ol>
-<li>Has the user made a selection?</li>
-<li>Has the user agreed to the terms and conditions?</li>
-</ol>
-<p>Once these are checked the final price can be calculated.</p>
-<pre><code>function checkTerms(event) {                                   // Declare function
-  var selection = elSelectPackage.options[elSelectPackage.selectedIndex].value; // Get selected option
-  if (selection == &quot;none&quot;) {                                   // if no selection is made
-      alert(&quot;You must make a selection&quot;);                  // Display dialog box with error message
-      event.preventDefault();                              // Don&#39;t submit form
-      return;                                                  // Exit the function
-  }
+        <h1>Do ... While Loops</h1>
+<p>If you want your loop to iterate at least once, use a <strong>do ... while</strong> loop so the condition is not tested until after 
+all the statements are executed.</p>
+<p>We will now look at an <a href="archives/Class Files/example3.htm" target = "_blank">example</a> that uses a <strong>Do While</strong> loop.</p>
+<pre><code>&lt;script&gt;
+do
+{
+    ans=prompt(&quot;Enter a Positive Number, 0 to end&quot;,&quot;&quot;);
+}while (ans&gt;=0)
+&lt;/script&gt;</code></pre>
 
-
-  if (!elTerms.checked) {                                // If terms and conditions checkbox ticked
-    elTermsHint.innerHTML = &#39;You must agree to the terms.&#39;; // Show message
-    event.preventDefault();                              // Don&#39;t submit form
-    return;                                              // Exit the function
-  }
-  if (elcoupon.checked) {                                // If coupon checkbox ticked 
-    price = price * .90;                                 // Apply discount of 10%.
-  }
-  alert(&quot;The membership is \u20AC&quot; + price);             // Display membership charge
-}</code></pre>
-<p>This function will not run until it is called, so we will add code that reponds to the event of the user submitting the membership form (clicking the submit button) as follows:</p>
-<pre><code>elForm.addEventListener(&#39;submit&#39;, checkTerms, false);//event listener for submit button - calls checkTerms() function</code></pre>
+      </div>
+     
+      <div  class="ui tab segment lab" data-tab="05">
+        <h1>Break and Continue</h1>
+<p>Two special commands can be used in loops: <strong>break</strong> and <strong>continue</strong>.</p>
+<h2>Break</h2>
+<p><strong>Break</strong> simply breaks the loop and continues with what might follow after the loop.</p>
+<p>An example would be if you had a loop to calculate the squareroot of numbers decrementing from 50.</p>
+<p>Since calculating the square root of a negative number is an illegal mathemathic operation you would like the loop to end when the square root of zero had been calculated. </p>
+<pre><code>if (value==0) {break};</code></pre>
+<h2>Continue</h2>
+<p><strong>Continue</strong> breaks the current loop and continues with the next value.</p>
+<p>An example would be if you had a loop that divided a certain value with a factor of numbers ranging from -50 to +50.</p>
+<p>Since division by zero is an illegal mathemathic procedure the loop should skip this iteration.</p>
+<pre><code>for (value=-50; value&lt;=50; value=value+1)
+{
+  if (value==0) {continue};
+  document.write((100/value)+&quot;&lt;br&gt;&quot;);</code></pre>
 
       </div>
      

@@ -115,13 +115,13 @@ body
   <header class="header item">
     <i id="toc" class="sitemap icon"></i>
     <a href="../index.html">
-      Module Introduction
+       JavaScript Part One
     </a>
   </header>
   <div class="right tab-menu menu">
     
-    <a class="item" data-tab="Add some Behaviour">
-      Add some Behaviour
+    <a class="item" data-tab="Global Methods">
+      Global Methods
     </a>
     
     <a class="item" data-tab="01">
@@ -130,14 +130,6 @@ body
     
     <a class="item" data-tab="02">
       02
-    </a>
-    
-    <a class="item" data-tab="03">
-      03
-    </a>
-    
-    <a class="item" data-tab="04">
-      04
     </a>
     
     <div class="item">
@@ -220,90 +212,73 @@ body
     <div class="ui basic segment" id="labchat">
       <br>
       
-      <div  class="ui tab segment lab" data-tab="Add some Behaviour">
+      <div  class="ui tab segment lab" data-tab="Global Methods">
         <h1>Objectives</h1>
-<p>This lab will recap laying out a webpage using Bootstrap</p>
+<p>This lab will explore some Global Methods on JavaScript.</p>
 <ul>
-<li><a href="#/01">Adding JavaScript to the code</a></li>
-<li><a href="#/02">Selecting the elements</a></li>
-<li><a href="#/03">Selecting an option</a></li>
-<li><a href="#/04">Submitting the Form</a></li>
+<li><a href="#/01">Global Methods</a></li>
+<li><a href="#/02">Examples</a></li>
 </ul>
 
       </div>
      
       <div  class="ui tab segment lab" data-tab="01">
-        <h1>Adding JavaScript to the code</h1>
-<p>In Lab01 we have a folder called <strong>.js</strong> and in it is a file called <strong>form.js</strong>. We are going to add code to this file.</p>
-<p>In the file <strong>form.html</strong> add a link to the <strong>form.js</strong> file as follows  (after the links to the other <strong>.js</strong> files):</p>
-<pre><code>&lt;script src=&quot;js/form.js&quot;&gt;&lt;/script&gt;</code></pre>
+        <h1>Global Methods</h1>
+<p><dl></p>
+<p><dt>
+<strong>isNaN(value)</strong></dt></p>
+<p><dd>
+This function returns true if its argument is not a number and false if it is numeric.</dd></p>
+<p><dt>
+<strong>parseFloat(string)</strong></dt></p>
+<p><dd>
+This function parses a string, passed in as an argument, and returns it as a floating point number. 
+The string is parsed from the start with the parser looking for the numbers 0 through 9, the signs + and -, decimal points
+and exponents only. When any other character is encountered the parser stops and returns what it has already found. 
+If the first character of the string does not belong to the valid set, <strong>NaN</strong> is returned.
+</dd></p>
+<p><dt>
+<strong>parseInt(string [, radix])</strong></dt></p>
+<p><dd>
+The string is parsed and its value as an integer returned. Once an invalid character is encountered the parsing stops and the 
+function returns what it has already found. If the first character of the string is invalid, <strong>NaN</strong> is returned.
+The function optionally takes a radix as its second argument, defaulting to base 10 if an alternative is not supplied.
+</dd>
+</dl>
+Other alternatives are <strong>Number</strong> and <strong>+</strong> symbol, but these return <strong>NaN</strong> if anything other than a number, a single period (full stop) or a + or - sign are found in the string.</p>
+<p>Note: <strong>NaN</strong> is a JavaScript Global Property which represents something which is not a number. 
+Variables can hold different types of data in JavaScript, so  is why you need a way of knowing if a value is currently numeric or not.</p>
+<p>See how the these methods work in the following <a href="archives/Class Files/example1.htm" target= "_blank">example</a>.</p>
 
       </div>
      
       <div  class="ui tab segment lab" data-tab="02">
-        <h1>Selecting the elements</h1>
-<p>We are going to add code to the <strong>form.js</strong> file that will allow JavaScript to refer to (select) elements on the webpage. Each element can be
-selected using their unique <strong>id</strong>:</p>
-<pre><code>var elForm, elSelectPackage, elPackageHint, elTerms, elTermsHint, elcoupon, price; // Declare variables
-
-elForm          = document.getElementById(&#39;formSignup&#39;);    //form      
-elSelectPackage = document.getElementById(&#39;package&#39;);       // select element
-elPackageHint   = document.getElementById(&#39;packageHint&#39;);   // Blank element underneath the select option
-elTerms         = document.getElementById(&#39;terms&#39;);         // terms and conditions checkbox
-elTermsHint     = document.getElementById(&#39;termsHint&#39;);     // Blank element underneath the terms and conditions checkbox
-elcoupon        = document.getElementById(&#39;coupon&#39;);        // coupon checkbox</code></pre>
-
-      </div>
-     
-      <div  class="ui tab segment lab" data-tab="03">
-        <h1>Selecting an option</h1>
-<p>Now we are going to add code to display a message when the user changes the option.
-When the user selects an option from the select element, the program responds to this event by displaying a message and noting the price.</p>
-<pre><code>function packageHint() {                                 // Declare function
-  var pack = this.options[this.selectedIndex].value;     // Get selected option
-  if (pack === &#39;monthly&#39;) {                              // If monthly package
-    elPackageHint.innerHTML = &#39;Save $10 if you pay for 1 year!&#39;;//Show this msg
-    price=60;                                            // Set price to 60
-  } else {                                               // Otherwise
-    elPackageHint.innerHTML = &#39;Wise choice!&#39;;            // Show this message
-    price = 50;                                          // Set price to 50
-  }
-}</code></pre>
-<p>This function will not run until it is called, so we will add code that reponds to the event of the user selecting an option from the select element as follows:</p>
-<pre><code>elSelectPackage.addEventListener(&#39;change&#39;, packageHint, false);//event listener for select element change - calls packageHint() function</code></pre>
-
-      </div>
-     
-      <div  class="ui tab segment lab" data-tab="04">
-        <h1>Submitting the Form</h1>
-<p>We now want to add code to respond to the user when the user submits the selection.</p>
-<p>Before the membership is processed a few checks must be carried out:</p>
-<ol>
-<li>Has the user made a selection?</li>
-<li>Has the user agreed to the terms and conditions?</li>
-</ol>
-<p>Once these are checked the final price can be calculated.</p>
-<pre><code>function checkTerms(event) {                                   // Declare function
-  var selection = elSelectPackage.options[elSelectPackage.selectedIndex].value; // Get selected option
-  if (selection == &quot;none&quot;) {                                   // if no selection is made
-      alert(&quot;You must make a selection&quot;);                  // Display dialog box with error message
-      event.preventDefault();                              // Don&#39;t submit form
-      return;                                                  // Exit the function
-  }
-
-
-  if (!elTerms.checked) {                                // If terms and conditions checkbox ticked
-    elTermsHint.innerHTML = &#39;You must agree to the terms.&#39;; // Show message
-    event.preventDefault();                              // Don&#39;t submit form
-    return;                                              // Exit the function
-  }
-  if (elcoupon.checked) {                                // If coupon checkbox ticked 
-    price = price * .90;                                 // Apply discount of 10%.
-  }
-  alert(&quot;The membership is \u20AC&quot; + price);             // Display membership charge
-}</code></pre>
-<p>This function will not run until it is called, so we will add code that reponds to the event of the user submitting the membership form (clicking the submit button) as follows:</p>
-<pre><code>elForm.addEventListener(&#39;submit&#39;, checkTerms, false);//event listener for submit button - calls checkTerms() function</code></pre>
+        <h1>Examples</h1>
+<p>In the following <a href="archives/Class Files/example2.htm" target= "_blank">example</a>, we prompt the user for a number and then
+test the value input. </p>
+<p>If the value entered includes a nonnumeric character then it is deemed to be invalid.</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+ var mynum=prompt(&#39;Enter a Number between 1 and 10&#39;,&#39;&#39;);
+ if (isNaN(mynum)) {
+   document.write(&#39;You did not enter a Number&#39;);
+ }
+ else {
+   document.write(&#39;The Number you entered was &#39; + mynum);
+ }
+&lt;/script&gt;</code></pre>
+<p>Now, in the following <a href="archives/Class Files/example3.htm" target= "_blank">example</a>, we again prompt the user for a number and then
+test the value input. </p>
+<p>If the value entered includes a nonnumeric character (after a numeric character/or numeric characters) then it is truncated.</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+ var mynum=parseInt(prompt(&#39;Enter a Number between 1 and 10&#39;,&#39;&#39;));
+ if (isNaN(mynum)) {
+   document.write(&#39;You did not enter a Number&#39;);
+ }
+ else {
+   document.write(&#39;The Number you entered was &#39; + mynum);
+ }
+&lt;/script&gt;</code></pre>
+<p>This example only returns that it is not a number if the first character is not numeric.</p>
 
       </div>
      
