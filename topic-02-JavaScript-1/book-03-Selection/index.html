@@ -251,7 +251,7 @@ else
 <ul>
 <li><p>Again it is important to note that if is written as &quot;if&quot;. Using the capital &quot;IF&quot; would cause an error. </p>
 </li>
-<li><p>Also note that when comparing variables you will need to have two equals signs next to each other (==). If we wrote browser=&quot;MSIE&quot; we would actually store &quot;MSIE&quot; in the variable called browser. When you write browser==&quot;MSIE&quot; JavaScript knows that you want it to compare rather than assign a value. </p>
+<li><p>Also note that when comparing variables you will need to have two equals signs next to each other (==) (more on this later). If we wrote browser=&quot;MSIE&quot; we would actually store &quot;MSIE&quot; in the variable called browser. When you write browser==&quot;MSIE&quot; JavaScript knows that you want it to compare rather than assign a value. </p>
 </li>
 <li><p>More complex if statements can be made by simply entering new if statements in the else part: </p>
 </li>
@@ -278,6 +278,8 @@ else {if (browser==&quot;Chrome&quot; || browser==&quot;chrome&quot; ||browser==
         <h1>Comparison Operators</h1>
 <p>The following table contains the different comparison operators: </p>
 <p><img src="img/op.png" alt=""></p>
+<p>When checking if two values are equal, it is considered better to use strict equals operators (===) and (!==) rather than (==) and (!=) as these strict operators
+check that the value and data types match.</p>
 
       </div>
      
@@ -293,7 +295,7 @@ individually evaluate to <strong>true</strong> for the whole expression to retur
  action;
 }</code></pre>
 <p>For example:</p>
-<pre><code>if (hour==12 &amp;&amp; minute==0) {
+<pre><code>if (hour===12 &amp;&amp; minute===0) {
   alert(&quot;it&#39;s noon&quot;);
 }</code></pre>
 <h2>Or</h2>
@@ -305,7 +307,7 @@ evaluate to <strong>true</strong> for the whole expression to return true</em>. 
   action;
 }</code></pre>
 <p>For example:</p>
-<pre><code>if (hour==11 || hour==10) {
+<pre><code>if (hour===11 || hour===10) {
   alert(&quot;it&#39;s less than 2 hours till noon&quot;);
 }</code></pre>
 <h2>Not</h2>
@@ -316,7 +318,7 @@ evaluate to <strong>true</strong> for the whole expression to return true</em>. 
   action;
 }</code></pre>
 <p>For example:</p>
-<pre><code>if (!(hour==11)) {
+<pre><code>if (!(hour===11)) {
  alert(&quot;it&#39;s more than 1 hour till noon&quot;);
 }</code></pre>
 
