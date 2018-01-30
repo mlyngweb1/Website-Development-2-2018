@@ -275,6 +275,12 @@ body
         </a>
       
     
+      
+        <a class="item" href="../../topic-04-JavaScript-3/book-04-Exercise/index.html">
+          Exercise
+        </a>
+      
+    
   </div>
   <div class="pusher" tabindex="-1">
     <div class="ui basic segment" id="labchat">
@@ -392,39 +398,38 @@ validate our form input.</p>
  &lt;input type=&quot;submit&quot; value=&quot;sign up&quot; &gt;
 &lt;/form&gt;</code></pre>
 <p>JS</p>
-<pre><code>function checkUsername() { // Declare function
+<pre><code>function checkUsername() { 
 
-  var elMsg = document.getElementById(&#39;feedback&#39;);     // Get feedback element
-  if (this.value.length &lt; 5) {                         // If username too short
-    elMsg.textContent = &#39;Username must be 5 characters or more&#39;; // Set msg
-    this.value=&quot;&quot;;                                     // Clear the text box
-    this.focus();                                      // Return focus to the text box
-  } else {                                             // Otherwise
-    elMsg.textContent = &#39;&#39;;                            // Clear msg
+  var elMsg = document.getElementById(&#39;feedback&#39;);     
+  if (this.value.length &lt; 5) {                         
+    elMsg.textContent = &#39;Username must be 5 characters or more&#39;; 
+    this.value=&quot;&quot;;                                     
+    this.focus();                                      
+  } else {                                             
+    elMsg.textContent = &#39;&#39;;                            
   }
 }
 
-function checkPassword() {                            // Declare function
-  var elFeedMsg = document.getElementById(&#39;feedbackmsg&#39;);     // Get feedback element
-  re = /[0-9]/;                                       // Set up a regular expression (all numbers)
-  re1 = /[a-z]/;                                      // Set up a regular expression (all lowercase letters)
-  re2 = /[A-Z]/;                                      // Set up a regular expression (all uppercase letters)
+function checkPassword() {                            
+  var elFeedMsg = document.getElementById(&#39;feedbackmsg&#39;);     
+  re = /[0-9]/;                                       
+  re1 = /[a-z]/;                                      
+  re2 = /[A-Z]/;                                      
   if ((this.value.length &lt; 6) || (!re.test(this.value)) || (!re1.test(this.value)) || (!re2.test(this.value))) {
-      // If password is too short or includes no number or no lowercase or uppercase letter
-    elFeedMsg.textContent = &#39;Password must be 6 characters or more and contain at least one letter (upper and lower case) and one number&#39;; // Set msg
-    this.value=&quot;&quot;;                                     // Clear the text box
-    this.focus();                                      // Return focus to the text box
-  } else {                                             // Otherwise
-    elFeedMsg.textContent = &#39;&#39;;                        // Clear msg
+    elFeedMsg.textContent = &#39;Password must be 6 characters or more and contain at least one letter (upper and lower case) and one number&#39;; 
+    this.value=&quot;&quot;;                                     
+    this.focus();                                      
+  } else {                                             
+    elFeedMsg.textContent = &#39;&#39;;                       
   }
 }
 
-var elUsername = document.getElementById(&#39;username&#39;);  // Get username input
-// When it loses focus call checkUsername()
+var elUsername = document.getElementById(&#39;username&#39;);  
+
 elUsername.addEventListener(&#39;blur&#39;, checkUsername, false);
 
-var elPass = document.getElementById(&#39;password&#39;);  // Get password input
-// When it loses focus call checkPassword()
+var elPass = document.getElementById(&#39;password&#39;); 
+
 elPass.addEventListener(&#39;blur&#39;, checkPassword, false);</code></pre>
 <p>First we set up access to inputs <strong>username</strong> and <strong>password</strong>. Event listeners are then set up for a <strong>blur</strong> event on both inputs. When the user leaves the first text box (username), the 
 function <strong>checkUsername</strong> is called.  And, when the user leaves the second text box (password), the function <strong>checkPassword</strong> is called. </p>
