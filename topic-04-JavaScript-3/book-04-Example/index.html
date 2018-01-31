@@ -120,8 +120,8 @@ body
   </header>
   <div class="right tab-menu menu">
     
-    <a class="item" data-tab="Events">
-      Events
+    <a class="item" data-tab="Example">
+      Example
     </a>
     
     <a class="item" data-tab="01">
@@ -134,10 +134,6 @@ body
     
     <a class="item" data-tab="03">
       03
-    </a>
-    
-    <a class="item" data-tab="04">
-      04
     </a>
     
     <div class="item">
@@ -292,170 +288,195 @@ body
     <div class="ui basic segment" id="labchat">
       <br>
       
-      <div  class="ui tab segment lab" data-tab="Events">
+      <div  class="ui tab segment lab" data-tab="Example">
         <h1>Objectives</h1>
-<p>This lab explores the events and event handling.  </p>
+<p>This lab will use JavaScript code to play a simple Lotto game.</p>
+<p>Previously in class, we wrote code generating 6 random numbers and saving them to an array (myNumbers). And we wrote code to prompt the user for 
+their 6 lotto numbers and also saved them to an array (lottoNumbers). As the numbers are input they are validated. Then we wrote code to compare the arrays. </p>
+<p>Now, we will write code for the <a href="archives/lotto/lotto.html" target = "_blank">lotto</a> game again, this time using forms. 
+The screenshot below includes 2 forms (numbers and lotto).</p>
+<p><img src="img/lotto1.png" alt=""></p>
 <ul>
-<li><a href="#01">Events</a></li>
-<li><a href="#02">Event Handling</a></li>
-<li><a href="#03">Using Event Listeners</a></li>
-<li><a href="#04">Form Example</a></li>
+<li><a href="#01">Form One</a></li>
+<li><a href="#02">Form Two - Play Game</a></li>
+<li><a href="#03">Form Two - Clear Numbers</a></li>
 </ul>
 
       </div>
      
       <div  class="ui tab segment lab" data-tab="01">
-        <h1>Events</h1>
-<p>When you browse the web, your browser registers different types of events. It&#39;s the bowsers way of saying &quot;Hey, this just happened&quot;. Your script can then respond
-to these events.</p>
-<p>An example would be the <strong>mouseover</strong> event, which is detected when the user moves the mouse over an object.   </p>
-<p>Another event is the <strong>load</strong> event, which is detected as soon as the page is finished loading.</p>
-<p>The following are the most important events recognized by javascript:</p>
-<p><img src="img/events.png" alt=""></p>
-<h2>Events Fire or are Raised</h2>
-<p>When an event has occurred, it is often described as having <strong>fired</strong> or been <strong>raised</strong>.</p>
-<h2>Events Trigger Scripts</h2>
-<p>Events are said to <strong>trigger</strong> a function or script.</p>
+        <h1>Form One</h1>
+<p>The first form (<strong>numbers</strong>) has 6 text boxes where we will ask the user to enter a number in each text box. 
+As the user enters a number and then goes to the next text box, a <em>blur</em> event is triggered for that text box. </p>
+<pre><code>mylottonumbers=document.getElementById(&#39;numbers&#39;).getElementsByTagName(&#39;input&#39;);
+for (i=0; i &lt; mylottonumbers.length; i++) {
+  mylottonumbers[i].addEventListener(&#39;blur&#39;,validNum,false);
+  ...
+}</code></pre>
+<p>First we select the input text boxes inside the <em>numbers</em> form. Then we add a <em>blur</em> event handler for each the input text box. </p>
+<p>This event will trigger a function call to <strong>validNum</strong>. This function includes code to ensure that the number entered is valid: not empty, is a number, 
+is in a valid range, and has not already been chosen (call to <strong>checkNums</strong> function).  </p>
+<p>If the value input violates any of the validation checks, an error message is output to a paragraph (error) below the form text boxes, the cursor back is put back into the text box, and the text box is cleared (emptied). </p>
+<pre><code>document.getElementById(&#39;error&#39;).textContent=msg;
+this.value=&quot;&quot;;
+this.focus();</code></pre>
+<p>If the number is valid it is added (pushed) to the array and the field is disabled.</p>
+<pre><code>myNumbers.push(parseInt(thevalue));
+this.disabled=true;</code></pre>
+<p>Note that when the validNum function is first called, the paragraph where the error message is output is cleared.</p>
+<pre><code>function checkNums(Lotto, num) {
+   x=Lotto.indexOf(num);
+   if (x==-1) {;
+       return true;
+   } else return false;
+}
+
+function validNum() {
+    document.getElementById(&#39;error&#39;).textContent=&quot;&quot;;
+    var thevalue=this.value;
+    if (thevalue==&quot;&quot; || isNaN(thevalue) || thevalue&lt;1 ||thevalue&gt;47)   {
+    msg=&quot;Invalid number entry.. Please enter a valid number between 1 and 47&quot;;
+    document.getElementById(&#39;error&#39;).textContent=msg;
+    this.value=&quot;&quot;;
+    this.focus();
+
+    }
+    else if  (!checkNums(myNumbers,parseInt(thevalue))) {
+    msg=&quot;Number already chosen .. Please enter a valid number between 1 and 47&quot;;
+    document.getElementById(&#39;error&#39;).textContent=msg;
+    this.value=&quot;&quot;;
+    this.focus();
+    }
+    else {myNumbers.push(parseInt(thevalue));
+    this.disabled=true;
+   }
+}</code></pre>
 
       </div>
      
       <div  class="ui tab segment lab" data-tab="02">
-        <h1>Event Handling</h1>
-<p>When the user interacts with the HTML on a web page, there are three steps involved in getting it to trigger some JavaScript code. Together these steps are known as <strong>Event Handling</strong>.</p>
-<ol>
-<li>Select the <em>element</em> node(s) you want the script to respond to.</li>
-<li>Indicate which <em>event</em> on the selected node(s) will trigger the response.</li>
-<li>State the <em>code</em> you want to run when the event occurs.</li>
-</ol>
-<h2>Example</h2>
-<p><img src="img/eg.jpg" alt=""> </p>
-<ol>
-<li>The element that users are interacting with is the text input where they enter their firstname.</li>
-<li>When users move out of the text input, it loses focus, and the <strong>blur</strong> event fires on this element.</li>
-<li>When the <strong>blur</strong> event fires on the firstname input, it will trigger a function, which will check whether the text entered is valid or not.</li>
-</ol>
+        <h1>Form Two - Play Game</h1>
+<p>The second form (lotto) has 2 text boxes, a textarea, and 2 buttons. </p>
+<p>When the user presses (<em>clicks</em>) the Play Game button, the click event will trigger a function call to <strong>newNumbers</strong>. </p>
+<pre><code>function newNumbers() {
+   if (myNumbers.length!=6)  {
+     document.getElementById(&#39;p1&#39;).innerHTML=&quot;&lt;b&gt;You must enter 6 valid numbers first&lt;/b&gt;&quot;;
+   }
+   else {
+     lottoNumbers = [];
+     var i=1;
+     while ( i&lt;7) {
+         newnum=Math.floor(Math.random()*47+1);
+         if (checkNums(lottoNumbers, newnum)) {
+            i++;
+            lottoNumbers.push(newnum);
+         }
+     }
+     document.getElementById(&#39;lnumbers&#39;).value=lottoNumbers.sort(function(a,b){return a - b});
+     document.getElementById(&#39;mynumbers&#39;).value=myNumbers.sort(function(a,b){return a - b});
+     compareNumbers();
+   }
+}
+
+playgame=document.getElementById(&#39;play&#39;);
+
+playgame.addEventListener(&#39;click&#39;,newNumbers,false);</code></pre>
+<p>This function includes code to check that the user has entered all their numbers (6 valid numbers) first. If the user has not entered 6 numbers (myNumbers &lt; 6), 
+an error message is displayed. </p>
+<p>When 6 valid numbers are in the myNumbers array, a new array (lottoNumbers) is created and populated with 6 valid random numbers between 1 and 47.</p>
+<p>Then the numbers from both arrays are output in ascending order to the text boxes in form 2.</p>
+<p>Finally, the <strong>compareNumbers</strong> function is called. This function compares the 2 arrays to ascertain if there are any matching numbers. 
+Each time a matching number is found a variable (match) is incremented. When the comparison is complete, a string message is composed detailing how many 
+(if any) matches were found and how much (if any) money was won. The money component is formatted using a call to the <strong>formatCurrency</strong> function. 
+The resulting string is then output to the textarea (results). </p>
+<pre><code>function compareNumbers() {
+   match=0;
+   for (i in lottoNumbers) {
+     x=myNumbers.indexOf(lottoNumbers[i]);
+     if (x&gt;=0) {
+       match++;
+     }
+   }
+   string=&quot;You have matched &quot;+ match + &quot; number(s).&quot;
+   switch (match) {
+     case 6:
+       win=1000000;
+       break;
+     case 5:
+       win=100000;
+       break;
+     case 4:
+       win=10000;
+       break;
+     case 3:
+       win=1000;
+       break;
+     case 2:
+       win=100;
+       break;
+     case 1:
+       win=10;
+       break;
+     default:
+       win=0;
+   }
+   string+=&quot;\nYou have won &quot; + formatCurrency(win);
+   document.getElementById(&#39;results&#39;).value=string;
+}
+
+function formatCurrency(num) {
+//Unicode Character &#39;EURO SIGN&#39; \u20ac*/
+   num = num.toString().replace(/\u20ac|\,/g,&#39;&#39;);
+   if(isNaN(num))
+   {
+     num = &quot;0&quot;;
+   }
+   sign = (num == (num = Math.abs(num)));
+   num = num.toFixed(2);
+   elements= num.split(&quot;.&quot;);
+   num = elements[0];
+   cents = elements[1];
+   for (var i = 0; i &lt; Math.floor((num.length-(1+i))/3); i++)
+   {
+     num = num.substring(0,num.length-(4*i+3))+&#39;,&#39;+
+     num.substring(num.length-(4*0+3));
+   }
+   return (((sign)?&#39;&#39;:&#39;-&#39;) + &#39;\u20ac&#39; + num + &#39;.&#39; + cents)
+}</code></pre>
+<p><img src="img/lotto.png" alt=""></p>
+<p><strong>Note:</strong></p>
+<p>The error message displayed when the user presses (<em>clicks</em>) the Play Game button and there is not enough numbers to proceed, 
+is cleared when the user puts focus into any of the input number text boxes.</p>
+<pre><code>for (i=0; i &lt; mylottonumbers.length; i++) {
+  ...
+  mylottonumbers[i].addEventListener(&#39;focus&#39;, eraseMsg, false);
+}</code></pre>
 
       </div>
      
       <div  class="ui tab segment lab" data-tab="03">
-        <h1>Using Event Listeners</h1>
-<p>The <strong>addEventListener()</strong> method attaches an event handler to the specified element.</p>
-<p><strong>Syntax</strong></p>
-<p>element.addEventListener(event, function, useCapture)</p>
-<dl>
-<dt>event</dt>
-<dd><em>Required</em>. A String that specifies the name of the event. Do not use the &quot;on&quot; prefix. For example, use &quot;click&quot; instead of &quot;onclick&quot;.
-</dd>
-<dt>function</dt>
-<dd><em>Required</em>. Specifies the function to run when the event occurs. 
-</dd>
-<dt>useCapture</dt>
-<dd><em>Optional</em>. A Boolean value that specifies whether the event should be executed in the capturing (true) or in the bubbling (false) phase.<br></dd>
+        <h1>Form Two - Clear Numbers</h1>
+<p>When the user presses (<em>clicks</em>) the Clear Numbers button, the click event will trigger a function call to <strong>clearNumbers</strong>. </p>
+<pre><code>function clearNumbers() {
+   mylottonumbers=document.getElementById(&#39;numbers&#39;).getElementsByTagName(&#39;input&#39;);
 
-</dl>
+   for (i=0; i &lt; mylottonumbers.length; i++) {
+     mylottonumbers[i].disabled=false;
+     mylottonumbers[i].value=&quot;&quot;;
+   }
 
-<h2>Simple Examples</h2>
-<h3>Example One</h3>
-<p><a href="archives/Class Files/event.htm" target = "_blank">Example One </a>responds to the event of a web page loading.</p>
-<pre><code>&lt;body&gt;
-&lt;script&gt;
-function handleload(e) {
-  alert(&quot;Page has loaded&quot;);
+   thelottonumbers=document.getElementById(&#39;lotto&#39;).querySelectorAll(&quot;input[type=text]&quot;);
+   for (i=0; i &lt; thelottonumbers.length; i++) {
+     thelottonumbers[i].value=&quot;&quot;;
+   }
+   document.getElementById(&#39;results&#39;).value=&quot;&quot;;
+   myNumbers = [];
 }
 
-window.addEventListener(&quot;load&quot;, handleload, false);
+cleargame=document.getElementById(&#39;clear&#39;);
 
-&lt;/script&gt;
-&lt;h1&gt;The page has loaded...&lt;/h1&gt;
-&lt;/body&gt;</code></pre>
-<h3>Example Two</h3>
-<p><a href="archives/Class Files/event.htm" target = "_blank">Example Two </a>responds to the event of a button being clicked.</p>
-<pre><code>&lt;body&gt;
-&lt;form&gt;
- &lt;button id=&quot;btnClickMe&quot;&gt;Click Me!&lt;/button&gt;
-&lt;/form&gt;
-
-&lt;script&gt;
- function handleClick() {
-   alert(&quot;You clicked the button!&quot;);
- }
-
- var myButton = document.getElementById(&quot;btnClickMe&quot;);
- myButton.addEventListener(&quot;click&quot;, handleClick, false);
-&lt;/script&gt;
-&lt;/body&gt;</code></pre>
-
-      </div>
-     
-      <div  class="ui tab segment lab" data-tab="04">
-        <h1>Form Example</h1>
-<p>In the following <a href="archives/Class Files/event-listener.html" target = "_blank">example</a>, we combine DOM manipulation, and event handling to help 
-validate our form input.</p>
-<p>HTML</p>
-<pre><code>&lt;form method=&quot;post&quot; action=&quot;&quot;&gt;
- &lt;label for=&quot;username&quot;&gt;Create a username: &lt;/label&gt;
- &lt;input type=&quot;text&quot; id=&quot;username&quot; autofocus&gt;
- &lt;div id=&quot;feedback&quot;&gt;&lt;/div&gt;
-
- &lt;label for=&quot;password&quot;&gt;Create a password: &lt;/label&gt;
- &lt;input type=&quot;password&quot; id=&quot;password&quot; &gt;
- &lt;div id=&quot;feedbackmsg&quot;&gt;&lt;/div&gt;
-
- &lt;input type=&quot;submit&quot; value=&quot;sign up&quot; &gt;
-&lt;/form&gt;</code></pre>
-<p>JS</p>
-<pre><code>function checkUsername() { 
-
-  var elMsg = document.getElementById(&#39;feedback&#39;);     
-  if (this.value.length &lt; 5) {                         
-    elMsg.textContent = &#39;Username must be 5 characters or more&#39;; 
-    this.value=&quot;&quot;;                                     
-    this.focus();                                      
-  } else {                                             
-    elMsg.textContent = &#39;&#39;;                            
-  }
-}
-
-function checkPassword() {                            
-  var elFeedMsg = document.getElementById(&#39;feedbackmsg&#39;);     
-  re = /[0-9]/;                                       
-  re1 = /[a-z]/;                                      
-  re2 = /[A-Z]/;                                      
-  if ((this.value.length &lt; 6) || (!re.test(this.value)) || (!re1.test(this.value)) || (!re2.test(this.value))) {
-    elFeedMsg.textContent = &#39;Password must be 6 characters or more and contain at least one letter (upper and lower case) and one number&#39;; 
-    this.value=&quot;&quot;;                                     
-    this.focus();                                      
-  } else {                                             
-    elFeedMsg.textContent = &#39;&#39;;                       
-  }
-}
-
-var elUsername = document.getElementById(&#39;username&#39;);  
-
-elUsername.addEventListener(&#39;blur&#39;, checkUsername, false);
-
-var elPass = document.getElementById(&#39;password&#39;); 
-
-elPass.addEventListener(&#39;blur&#39;, checkPassword, false);</code></pre>
-<p>First we set up access to inputs <strong>username</strong> and <strong>password</strong>. Event listeners are then set up for a <strong>blur</strong> event on both inputs. When the user leaves the first text box (username), the 
-function <strong>checkUsername</strong> is called.  And, when the user leaves the second text box (password), the function <strong>checkPassword</strong> is called. </p>
-<p>Both functions include tests against the value entered. If there is an error (true), then:</p>
-<ol>
-<li>An error message is written to the empty <strong>div</strong> underneath each element (feedback and feedbackmsg respectively). This message is written to the text node
-using <strong>textContent</strong>. You could use <strong>innerHTML</strong> also (this allows the text to be marked up).</li>
-<li>The text box is emptied (<strong>this.value=&quot;&quot;;</strong>)</li>
-<li>Focus is returned to the text box (<strong>this.focus();</strong>).</li>
-</ol>
-<p>If there is no error (false), then an empty message is written to the empty <strong>div</strong> underneath each element.</p>
-<h2>Form Example Continued</h2>
-<p>The following <a href="archives/Class Files/event-listener-submission.html" target = "_blank">example</a>, expands the above example to include an event handler for the <strong>submit</strong> event.</p>
-<pre><code>function feedback() {
-    alert(&quot;Thank you &quot;+document.getElementById(&quot;username&quot;).value+&quot; for your submission&quot;);
-}
-
-// When the form is submitted call feedback()
-document.addEventListener(&quot;submit&quot;, feedback, false);</code></pre>
-<p>Our final <a href="archives/Class Files/WIT Ski Club.htm" target = "_blank">example</a>, calculates the cost of a ski trip based on user data.</p>
+cleargame.addEventListener(&#39;click&#39;,clearNumbers,false);</code></pre>
+<p>This function clears the elements on both forms and empties the myNumbers array.</p>
 
       </div>
      
