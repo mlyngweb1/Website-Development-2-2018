@@ -130,13 +130,6 @@ $("#clear").on('click', function() {
     clearNumbers();
 });
 
-$('#myImage').on({
-   mouseenter: function(){
-    $(this).attr('src', 'images/landscape.jpg');
-   },
-   mouseleave: function(){
-    $(this).attr('src', 'images/landscape.gif');
-  }
-});
+
 
 
