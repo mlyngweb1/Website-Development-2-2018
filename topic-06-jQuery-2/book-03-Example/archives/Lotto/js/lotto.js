@@ -111,13 +111,16 @@ function newNumbers() {
    }
 }
 
-$('#numbers input[type="text"]').on('blur', function () {
-    validNum($(this));
+
+$('#numbers input[type="text"]').on({
+	blur: function () {
+      validNum($(this));
+    },
+   focus: function () {
+    $('#error2').text("");
+   }
 });
 
-$('#numbers input[type="text"]').on('focus', function () {
-    $('#error2').text("");
-});
 
 $("#play").on('click', function() {
     newNumbers();
@@ -125,6 +128,15 @@ $("#play").on('click', function() {
 
 $("#clear").on('click', function() {
     clearNumbers();
+});
+
+$('#myImage').on({
+   mouseenter: function(){
+    $(this).attr('src', 'images/landscape.jpg');
+   },
+   mouseleave: function(){
+    $(this).attr('src', 'images/landscape.gif');
+  }
 });
 
 

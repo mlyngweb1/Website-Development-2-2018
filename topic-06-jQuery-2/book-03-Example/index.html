@@ -373,14 +373,16 @@ Likewise, to add a message to the element with an ID of <em>error</em>, we use <
 }</code></pre>
 <p>The clearNumbers() function uses  <strong>.each()</strong> anonymous functions to clear each form and on one of the forms, enable the text boxes also.</p>
 <h2>Handling the Events</h2>
-<pre><code>$(&#39;#numbers input[type=&quot;text&quot;]&#39;).on(&#39;blur&#39;, function () {
-    validNum($(this));
+<pre><code>$(&#39;#numbers input[type=&quot;text&quot;]&#39;).on({
+    blur: function () {
+      validNum($(this));
+    },
+   focus: function () {
+    $(&#39;#error2&#39;).text(&quot;&quot;);
+   }
 });</code></pre>
-<p>This code calls the <strong>validNum()</strong> function when any text box in the <em>numbers</em> form has a <em>blur</em> event.</p>
-<pre><code>$(&#39;#numbers input[type=&quot;text&quot;]&#39;).on(&#39;focus&#39;, function () {
-    $(&#39;#p1&#39;).text(&quot;&quot;);
-});</code></pre>
-<p>This code clears the paragraph with the ID of <em>error2</em>  when any text box in the <em>numbers</em> form has a <em>focus</em> event.</p>
+<p>This code calls the <strong>validNum()</strong> function when any text box in the <em>numbers</em> form has a <em>blur</em> event. And, the code clears the paragraph with the ID 
+of <em>error2</em>  when any text box in the <em>numbers</em> form has a <em>focus</em> event.</p>
 <pre><code>$(&quot;#play&quot;).on(&#39;click&#39;, function() {
     newNumbers();
 });</code></pre>
